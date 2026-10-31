@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：注册页
+    对应数据库表：users（用户表）、userRoles（用户角色表）
+    功能描述：新用户注册：必填校验、邮箱格式校验、口令强度与两次输入一致性校验，写入用户表
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="login">
+
+        <!-- 左侧品牌区：背景图 + 大标题 + 三列特性 -->
+        <section class="login-left">
+            <div class="login-bg">
+                <img src="../img/login-hero.jpg" alt="">
+                <div class="login-bg-mask"></div>
+            </div>
+            <!-- 左下角暗色斜切装饰 -->
+            <div class="login-corner"></div>
+
+            <!-- 顶部：品牌标 + 宣传语 -->
+            <header class="login-top">
+                <a class="brand brand--panel" href="welcome.html">
+                    <span class="brand-mark brand-mark--gold">TM</span>
+                    <span>
+                        <span class="brand-name">职途智配</span>
+                        <span class="brand-sub brand-sub--gold">TALENT MATCH</span>
+                    </span>
+                </a>
+                <p class="login-slogan"><span class="slogan-dash"></span>用数据，连接职业与未来</p>
+            </header>
+
+            <!-- 中部：大标题 + 说明文字 -->
+            <div class="login-mid">
+                <h1 class="login-title"><span class="t-white">先建档案</span><br><span class="t-yellow">再谈匹配。</span></h1>
+                <p class="login-lede">一个账号，一份技能档案。把你会的技能和等级登记进来，系统才知道该把你配给哪个岗位。</p>
+            </div>
+
+            <!-- 底部三列特性（图标全部 CSS 绘制） -->
+            <div class="login-feats">
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span class="ico-ring"></span></span>
+                        <span class="feat-title">01 创建账号</span>
+                    </div>
+                    <p class="feat-sub">用户名与邮箱唯一，注册后即可登录工作台</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span
+                                class="ico-bars"><span></span><span></span><span></span></span></span>
+                        <span class="feat-title">02 登记技能等级</span>
+                    </div>
+                    <p class="feat-sub">逐项填写 1～5 级，形成你的技能档案</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span class="ico-up">&nearr;</span></span>
+                        <span class="feat-title">03 得到匹配结果</span>
+                    </div>
+                    <p class="feat-sub">按岗位技能权重算出匹配度与差距清单</p>
+                </div>
+            </div>
+
+            <p class="muted copyright-panel">&copy; 2026 职途智配 TalentMatch</p>
+        </section>
+
+        <!-- 右侧注册表单 -->
+        <section class="login-right">
+            <p class="login-tag">职业有方向 · 成长有路径</p>
+            <!-- 右下角城市剪影装饰（纯 CSS） -->
+            <div class="login-city">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+            <!-- 表单盒子 -->
+            <div class="login-box">
+                <h2>创建账号</h2>
+                <p class="login-sub">注册后即可登记技能、测算岗位匹配度</p>
+
+                <!-- 注册表单：validateRegister() 校验 -->
+                <form action="login.html" method="get" onsubmit="return validateRegister()" id="regForm">
+                    <p class="form-error hidden" id="err"></p>
+
+                    <div class="field">
+                        <label for="username">用户名</label>
+                        <div class="in-wrap">
+                            <span class="in-ico"></span>
+                            <input class="input" type="text" id="username" name="username" placeholder="3～16 位，字母数字或下划线"
+                                maxlength="16" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">电子邮箱</label>
+                        <div class="in-wrap">
+                            <span class="in-ico in-ico--mail"></span>
+                            <input class="input" type="text" id="email" name="email"
+                                placeholder="用于找回密码，例如 you@example.com" maxlength="60">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">设置密码</label>
+                        <div class="in-wrap">
+                            <span class="in-ico in-ico--lock"></span>
+                            <input class="input input--pw" type="password" id="password" name="password"
+                                placeholder="至少 6 位，不建议纯数字" maxlength="20" oninput="updateStrength()">
+                            <button class="pw-eye" type="button" onclick="togglePassword(this, 'password')"
+                                aria-label="显示或隐藏密码">
+                                <span class="eye"></span>
+                            </button>
+                        </div>
+                        <div class="pw-meter" id="meter">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        <p class="pw-hint" id="hint">密码强度：未输入</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="password2">确认密码</label>
+                        <div class="in-wrap">
+                            <span class="in-ico in-ico--lock"></span>
+                            <input class="input input--pw" type="password" id="password2" name="password2"
+                                placeholder="再输入一次" maxlength="20">
+                            <button class="pw-eye" type="button" onclick="togglePassword(this, 'password2')"
+                                aria-label="显示或隐藏密码">
+                                <span class="eye"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 条款同意勾选 -->
+                    <div class="reg-terms">
+                        <label class="flex-top">
+                            <input type="checkbox" id="agree" name="agree" class="mt-3">
+                            <span>我已阅读并同意 <a href="#">用户协议</a> 与 <a href="#">隐私说明</a></span>
+                        </label>
+                    </div>
+
+                    <button class="btn btn--primary btn--block" type="submit">注册 &rarr;</button>
+                </form>
+
+                <!-- 注册成功卡片（默认隐藏，注册成功后替换表单显示） -->
+                <div class="reg-done hidden" id="done">
+                    <p class="demo-main">账号已创建</p>
+                    <p class="demo-more" id="doneText">用户名 —</p>
+                    <p class="demo-more mt-8">这个账号只在当前页面里有效，刷新后需要重新注册。</p>
+                    <a class="btn btn--primary btn--block btn--soft" href="login.html">去登录 &rarr;</a>
+                </div>
+
+                <p class="login-foot-links">已有账号？
+                    <a href="login.html">返回登录</a>
+                    ｜ <a href="mailto:admin@example.com">联系管理员</a>
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/register.js"></script>
+
+</body>
+
+</html>

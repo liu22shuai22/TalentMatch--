@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：岗位库
+    对应数据库表：jobs（岗位表）、industries（行业表）、jobCategories（岗位类别表）、jobSkillRequirements（岗位技能要求表）、skills（技能表）
+    功能描述：浏览与筛选岗位列表，查看岗位详情及其技能要求明细
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岗位库 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">JOBS</p>
+                    <h1 class="page-title">岗位库</h1>
+                    <p class="page-lede">按行业、职业等级和技能图谱完整度筛岗位。点开任一岗位，右侧会列出它对每项技能的要求等级与权重。</p>
+                </div>
+                <div class="page-meta" id="meta"></div>
+            </header>
+
+            <!-- 筛选工具条：关键字 / 行业 / 职业等级 / 技能类别 -->
+            <section class="sec mt-0">
+                <div class="card">
+                    <div class="toolbar">
+                        <div class="field grow-180">
+                            <label for="kw">岗位名称</label>
+                            <input class="input" type="text" id="kw" placeholder="输入关键字，例如：数据分析" maxlength="20">
+                        </div>
+                        <div class="field">
+                            <label for="fIndustry">所属行业</label>
+                            <select class="select" id="fIndustry"></select>
+                        </div>
+                        <div class="field">
+                            <label for="fLevel">职业等级</label>
+                            <select class="select" id="fLevel">
+                                <option value="">全部等级</option>
+                                <option value="初级">初级</option>
+                                <option value="中级">中级</option>
+                                <option value="高级">高级</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="fGraph">技能图谱</label>
+                            <select class="select" id="fGraph">
+                                <option value="">全部</option>
+                                <option value="done">已配置要求</option>
+                                <option value="todo">待维护</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--primary" type="button" onclick="renderList()">筛选</button>
+                        <button class="btn" type="button" onclick="resetFilters()">重置</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 岗位清单表格 + 右侧详情面板（onclick viewJob 联动） -->
+            <section class="sec">
+                <div class="split">
+                    <div class="split-main">
+                        <div class="sec-head">
+                            <span class="sec-no">01</span>
+                            <h2 class="sec-title">岗位清单</h2>
+                            <span class="sec-note" id="countNote"></span>
+                        </div>
+                        <div class="tbl-wrap">
+                            <table class="tbl" id="jobTable"></table>
+                        </div>
+                    </div>
+                    <div class="split-side">
+                        <div class="sec-head">
+                            <span class="sec-no">02</span>
+                            <h2 class="sec-title">岗位详情</h2>
+                        </div>
+                        <div id="detail"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/job_list.js"></script>
+
+</body>
+
+</html>

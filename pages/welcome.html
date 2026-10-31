@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：欢迎页（导航落地页）
+    对应数据库表：无（纯导航落地页，不直接读写数据表）
+    功能描述：介绍平台定位与使用路径，引导登录、注册或直接进入工作台
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职途智配 · 先量一量，再选岗位</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- 顶部导航 -->
+    <header class="lp-bar">
+        <div class="lp-wrap lp-bar-in">
+            <a class="brand" href="welcome.html">
+                <span class="brand-mark">TM</span>
+                <span>
+                    <span class="brand-name">职途智配</span>
+                    <span class="brand-sub">TALENT MATCH</span>
+                </span>
+            </a>
+            <nav class="lp-nav">
+                <a href="#values">解决什么</a>
+                <a href="#how">怎么用</a>
+                <a href="#example">看一个例子</a>
+            </nav>
+            <div class="lp-bar-cta">
+                <a class="btn btn--sm" href="login.html">登录</a>
+                <a class="btn btn--sm btn--primary" href="register.html">创建账号</a>
+                <a class="btn btn--sm btn--github" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首屏 -->
+    <section class="lp-hero">
+        <div class="lp-hero-bg">
+            <img src="../img/hero-welcome.jpg" alt="">
+            <div class="lp-hero-mask"></div>
+        </div>
+
+        <div class="lp-wrap lp-hero-in">
+            <p class="lp-eyebrow"><span></span>TALENT MATCH · 岗位匹配与技能补齐</p>
+
+            <h1 class="lp-h1">别再猜岗位要什么，<br><em>量一量你差多少。</em></h1>
+
+            <p class="lp-lede">选一个目标岗位，按你现在的技能等级算出匹配分。差的几项会排成学习任务，告诉你先补哪一个。</p>
+
+            <div class="lp-cta">
+                <a class="btn btn--primary" href="../index.html">进入工作台 &rarr;</a>
+                <a class="btn btn--ghost" href="register.html">先注册一个账号</a>
+            </div>
+
+            <div class="lp-stats lp-stats--3">
+                <div>
+                    <p class="lp-stat-num">42.5</p>
+                    <p class="lp-stat-label">zhangwei 对数据分析师的匹配分</p>
+                </div>
+                <div>
+                    <p class="lp-stat-num">3<small>项</small></p>
+                    <p class="lp-stat-label">还没达标，已排进学习任务</p>
+                </div>
+                <div>
+                    <p class="lp-stat-num">0<small>级</small></p>
+                    <p class="lp-stat-label">数据分析现在的等级，岗位要 4 级</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决什么 -->
+    <section class="lp-sec" id="values">
+        <div class="lp-wrap">
+            <div class="lp-sec-head">
+                <p class="lp-kicker">WHY TALENTMATCH</p>
+                <h2>求职里最费时间的三个问题，一次算清楚</h2>
+                <p>不是又一份岗位清单，而是把「我够不够」这件事量化出来，并给出补齐的顺序。</p>
+            </div>
+
+            <div class="lp-cards">
+                <article class="lp-card">
+                    <span class="lp-card-no">01</span>
+                    <h3>这个岗位，我匹配多少</h3>
+                    <p>不是感觉像不像，而是按岗位要求的每项技能、各自的权重，和你当前的等级逐项加权，算出一个 0～100 的分数。</p>
+                    <ul>
+                        <li>每项技能的权重与要求等级</li>
+                        <li>超过岗位要求的等级不再加分</li>
+                        <li>每一项技能对总分的贡献都列得出来</li>
+                    </ul>
+                </article>
+
+                <article class="lp-card">
+                    <span class="lp-card-no">02</span>
+                    <h3>差在哪几项，差多少</h3>
+                    <p>把没达标的技能按缺口从大到小排开，先补哪一项、补完能涨多少分，一眼能看清。</p>
+                    <ul>
+                        <li>必备技能达标情况</li>
+                        <li>缺口排序与加权得分</li>
+                        <li>换岗位即时重算对比</li>
+                    </ul>
+                </article>
+
+                <article class="lp-card">
+                    <span class="lp-card-no">03</span>
+                    <h3>补差距要按什么顺序</h3>
+                    <p>技能之间有前置关系，硬啃高阶内容只会卡住。系统按前置关系排出路径，再把资源挂到每个任务上。</p>
+                    <ul>
+                        <li>技能前置关系生成学习顺序</li>
+                        <li>缺口自动转成学习任务</li>
+                        <li>任务勾选记录完成进度</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 怎么用 -->
+    <section class="lp-sec lp-sec--tint" id="how">
+        <div class="lp-wrap">
+            <div class="lp-sec-head">
+                <p class="lp-kicker">HOW IT WORKS</p>
+                <h2>四步，从建档到看得见的进步</h2>
+            </div>
+
+            <div class="lp-steps">
+                <div class="lp-step">
+                    <p class="lp-step-no">01</p>
+                    <h4>注册建档</h4>
+                    <p>用户名与邮箱唯一，注册后进入工作台，账号对应一份个人档案。</p>
+                </div>
+                <div class="lp-step">
+                    <p class="lp-step-no">02</p>
+                    <h4>登记技能等级</h4>
+                    <p>从技能词条里挑出你会的，按 1～5 级自评，形成技能档案。</p>
+                </div>
+                <div class="lp-step">
+                    <p class="lp-step-no">03</p>
+                    <h4>选岗位算匹配</h4>
+                    <p>挑一个目标岗位，系统按权重逐项加权，给出匹配度与差距清单。</p>
+                </div>
+                <div class="lp-step">
+                    <p class="lp-step-no">04</p>
+                    <h4>补差距看进度</h4>
+                    <p>缺口排成学习任务，按路径推进，勾选完成即更新计划进度。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 一个具体的人 -->
+    <section class="lp-facts" id="example">
+        <div class="lp-wrap lp-facts-grid">
+            <div>
+                <h2>zhangwei 想做数据分析师，<br>现在差<em>3 项</em>。</h2>
+                <p>匹配分是 42.5。数据分析还是 0 级，岗位要 4 级；统计学基础也是 0 级；SQL 有 2 级，还差 2 级。这三项已经排进他的学习任务，先补数据分析。</p>
+            </div>
+
+            <div class="lp-fact-row">
+                <div class="lp-fact">
+                    <b>42.5</b>
+                    <span>对数据分析师<br>现在的匹配分</span>
+                </div>
+                <div class="lp-fact">
+                    <b>3</b>
+                    <span>项还没达标<br>已排成学习任务</span>
+                </div>
+                <div class="lp-fact">
+                    <b>数据分析</b>
+                    <span>先补这一项<br>现在 0 级，岗位要 4 级</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="lp-foot">
+        <div class="lp-wrap lp-foot-in">
+            <a class="brand brand--bare" href="welcome.html">
+                <span class="brand-mark">TM</span>
+                <span>
+                    <span class="brand-name">职途智配</span>
+                    <span class="brand-sub">TALENT MATCH</span>
+                </span>
+            </a>
+
+            <nav class="lp-foot-links">
+                <a href="../index.html">工作台</a>
+                <a href="job_list.html">岗位库</a>
+                <a href="assessment_form.html">能力评估</a>
+                <a href="plan_list.html">学习计划</a>
+                <a href="login.html">登录</a>
+                <a href="register.html">注册</a>
+            </nav>
+
+            <p class="muted">&copy; 2026 职途智配 TalentMatch</p>
+        </div>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

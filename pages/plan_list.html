@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：学习计划
+    对应数据库表：learningPlans（学习计划表）、learningTasks（学习任务表）、learningResources（学习资源表）、skillPrerequisites（技能先修表）、skills（技能表）、assessmentRecords（评估记录表）、jobSkillRequirements（岗位技能要求表）、userSkills（用户技能表）
+    功能描述：查看学习计划与任务进度、勾选开始/完成任务、按最近评估生成计划、浏览学习资源与先修路径
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习计划 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">LEARNING PLAN</p>
+                    <h1 class="page-title">学习计划</h1>
+                    <p class="page-lede">每个计划都从一次评估记录长出来：差哪几项技能，就排哪几个任务，任务按顺序解锁，配一条对应的学习资源。</p>
+                </div>
+                <div class="page-meta" id="meta"></div>
+            </header>
+
+            <!-- 计划标签页：切换不同学习计划 -->
+            <section class="sec mt-0">
+                <div class="flex-baseline mb-16">
+                    <div class="tabs" id="planTabs"></div>
+                    <button class="btn btn--dark" type="button" onclick="generatePlan()">按最近评估生成计划</button>
+                </div>
+                <p class="pw-hint" id="genHint"></p>
+            </section>
+
+            <!-- 计划概览 + 任务清单（可勾选、可批量全选） -->
+            <section class="sec">
+                <div class="split">
+                    <div class="split-main">
+                        <div class="sec-head">
+                            <span class="sec-no">01</span>
+                            <h2 class="sec-title">任务清单</h2>
+                            <span class="sec-note" id="taskNote"></span>
+                        </div>
+                        <div class="tbl-wrap">
+                            <table class="tbl" id="taskTable"></table>
+                        </div>
+                        <div class="callout">
+                            勾选左侧方框可以批量标记，配合表头的「全选」一次性处理整张表。
+                        </div>
+                    </div>
+                    <div class="split-side">
+                        <div class="sec-head">
+                            <span class="sec-no">02</span>
+                            <h2 class="sec-title">计划概览</h2>
+                        </div>
+                        <div id="overview"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学习资源库：按类型筛选 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">03</span>
+                    <h2 class="sec-title">学习资源库</h2>
+                    <span class="sec-note" id="resNote"></span>
+                </div>
+                <div class="tabs mb-16" id="resTabs"></div>
+                <div class="tbl-wrap">
+                    <table class="tbl" id="resTable"></table>
+                </div>
+            </section>
+
+            <!-- 技能前置路径：目标技能 ← 需要先学的技能 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">04</span>
+                    <h2 class="sec-title">技能前置路径</h2>
+                    <span class="sec-note">技能前置关系表 · 4 条</span>
+                </div>
+                <div class="jobs-grid" id="path"></div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/plan_list.js"></script>
+
+</body>
+
+</html>

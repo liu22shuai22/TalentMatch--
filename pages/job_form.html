@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：岗位维护
+    对应数据库表：jobs（岗位表）、jobCategories（岗位类别表）、industries（行业表）、jobSkillRequirements（岗位技能要求表）、skills（技能表）
+    功能描述：维护人员配置各岗位的技能要求（要求等级与权重），校验权重合计为 1.00
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岗位维护 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">JOB MAINTAIN</p>
+                    <h1 class="page-title">岗位维护</h1>
+                    <p class="page-lede">岗位信息维护人员的入口：为岗位补录技能要求（要求等级、技能权重、必备标记）。权重合计应等于 1.00，配齐后岗位自动进入全站的匹配计算。</p>
+                </div>
+                <div class="page-meta" id="meta"></div>
+            </header>
+
+            <!-- 统计卡：岗位总数 / 已配置 / 待配置 / 要求总数 -->
+            <section class="sec mt-0">
+                <div class="stats" id="maintainStats"></div>
+            </section>
+
+            <!-- 01 岗位清单：挑一个岗位去配置 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">01</span>
+                    <h2 class="sec-title">岗位清单</h2>
+                    <span class="sec-note" id="jobNote"></span>
+                </div>
+                <div class="tbl-wrap">
+                    <table class="tbl" id="jobTable"></table>
+                </div>
+            </section>
+
+            <!-- 02 技能要求配置：现有限制 + 新增一行 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">02</span>
+                    <h2 class="sec-title">技能要求配置</h2>
+                    <span class="sec-note" id="reqNote">先在上方选择一个岗位</span>
+                </div>
+
+                <div class="card mb-16">
+                    <div class="toolbar">
+                        <div class="field grow-180">
+                            <label for="addSkill">技能</label>
+                            <select class="select" id="addSkill"></select>
+                        </div>
+                        <div class="field grow-170">
+                            <label for="addLevel">要求等级</label>
+                            <select class="select" id="addLevel">
+                                <option value="1">1 级 · 了解即可</option>
+                                <option value="2">2 级 · 基础</option>
+                                <option value="3" selected>3 级 · 熟练</option>
+                                <option value="4">4 级 · 精通</option>
+                                <option value="5">5 级 · 专家</option>
+                            </select>
+                        </div>
+                        <div class="field grow-170">
+                            <label for="addWeight">技能权重</label>
+                            <select class="select" id="addWeight"></select>
+                        </div>
+                        <div class="field">
+                            <label>&nbsp;</label>
+                            <span class="check-line"><input type="checkbox" id="addMust"> 必备技能</span>
+                        </div>
+                        <div class="field">
+                            <label>&nbsp;</label>
+                            <button class="btn btn--primary" type="button" onclick="addRequirement()">添加这条要求</button>
+                        </div>
+                    </div>
+                    <p class="pw-hint mt-8" id="addHint"></p>
+                </div>
+
+                <div class="tbl-wrap">
+                    <table class="tbl" id="reqTable"></table>
+                </div>
+
+                <div class="callout mt-14">
+                    校验规则：同一岗位同一技能只保留一条要求；每条要求的权重在 5%～60% 之间；
+                    一个岗位全部要求的权重合计应等于 1.00，合计不符时上方会给出橙色提醒。
+                    这里改过的要求只留在当前页面，刷新后回到原来的数据。
+                </div>
+            </section>
+
+            <section class="sec">
+                <div class="sec-head">
+                    <h2 class="sec-title">库内规模</h2>
+                    <span class="sec-note">岗位、技能、资源与行业，供核对</span>
+                </div>
+                <div class="stats stats--aside" id="catalogStats"></div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/job_form.js"></script>
+</body>
+
+</html>

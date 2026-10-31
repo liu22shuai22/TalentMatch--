@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：技能登记
+    对应数据库表：skills（技能表）、skillCategories（技能类别表）、userSkills（用户技能表）
+    功能描述：技能库浏览与筛选，登记/修改/删除个人技能及等级
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能登记 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">SKILL PROFILE</p>
+                    <h1 class="page-title">技能登记</h1>
+                    <p class="page-lede">匹配度的输入全部来自这张档案：把你会 的技能按 1～5 级登记进去，评估页才算得出你离目标岗位还差多少。</p>
+                </div>
+                <div class="page-meta" id="meta"></div>
+            </header>
+
+            <!-- 统计卡：已登记 / 平均等级 / 覆盖类别 / 最近更新 -->
+            <section class="sec mt-0">
+                <div class="stats" id="skillStats"></div>
+            </section>
+
+            <!-- 左：技能清单（可筛选、可挑选）｜ 右：我的技能档案 -->
+            <section class="sec">
+                <div class="split">
+                    <div class="split-main">
+                        <div class="sec-head">
+                            <span class="sec-no">01</span>
+                            <h2 class="sec-title">技能清单</h2>
+                            <span class="sec-note" id="listNote"></span>
+                        </div>
+                        <div class="card">
+                            <div class="toolbar">
+                                <div class="field grow-180">
+                                    <label for="kw">关键词</label>
+                                    <input class="input" type="text" id="kw" oninput="filterSkills()"
+                                        placeholder="技能名称 / 描述" maxlength="20">
+                                </div>
+                                <div class="field grow-170">
+                                    <label for="selCat">技能类别</label>
+                                    <select class="select" id="selCat" onchange="filterSkills()"></select>
+                                </div>
+                                <div class="field">
+                                    <label>&nbsp;</label>
+                                    <button class="btn" type="button" onclick="resetSkillFilter()">重置</button>
+                                </div>
+                            </div>
+                            <div class="tbl-wrap">
+                                <table class="tbl" id="skillTable"></table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-side">
+                        <div class="sec-head">
+                            <span class="sec-no">02</span>
+                            <h2 class="sec-title">我的技能档案</h2>
+                        </div>
+                        <div id="myProfile"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 登记区：选技能 → 定等级 → 保存 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">03</span>
+                    <h2 class="sec-title">登记 / 修改</h2>
+                    <span class="sec-note">写入用户技能表</span>
+                </div>
+                <div class="card">
+                    <div class="toolbar">
+                        <div class="field grow-220">
+                            <label for="selSkill">选择技能</label>
+                            <select class="select" id="selSkill" onchange="pickSkill()"></select>
+                        </div>
+                        <div class="field">
+                            <label>熟练程度（1～5 级）</label>
+                            <div class="tabs" id="levelTabs"></div>
+                        </div>
+                    </div>
+
+                    <div class="field mt-14">
+                        <label for="proof">技能证明材料（可选）</label>
+                        <input class="input" type="text" id="proof" placeholder="例如：SQL 中级证书 / 项目里写过的报表" maxlength="40">
+                    </div>
+
+                    <div class="flex-top mt-14">
+                        <button class="btn btn--primary" type="button" onclick="saveSkill()">保存到我的技能档案</button>
+                        <button class="btn" type="button" onclick="clearForm()">清空</button>
+                    </div>
+
+                    <p class="form-error hidden" id="skillErr"></p>
+                    <p class="pw-hint mt-10" id="skillHint"></p>
+
+                    <div class="callout mt-14">
+                        登记规则：同一项技能只保留一条记录，重复登记视为修改；等级 0 表示删除该项技能。
+                        当前为静态原型，数据只保存在本页内存，刷新后回到测试数据。
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/skill_list.js"></script>
+</body>
+
+</html>

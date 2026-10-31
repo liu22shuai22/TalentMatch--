@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：能力评估
+    对应数据库表：users（用户表）、jobs（岗位表）、skills（技能表）、jobSkillRequirements（岗位技能要求表）、assessmentRecords（评估记录表）、assessmentDetails（评估明细表）
+    功能描述：选择用户与岗位计算加权匹配分，展示缺口技能与明细，支持保存评估记录
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能力评估 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">ASSESSMENT</p>
+                    <h1 class="page-title">能力评估</h1>
+                    <p class="page-lede">选一个人和一个岗位，按技能等级算出匹配分。超过岗位要求的部分不再加分。</p>
+                </div>
+                <div class="page-meta">满分 100</div>
+            </header>
+
+            <!-- 选择条件：评估对象 + 目标岗位 -->
+            <section class="sec mt-0">
+                <div class="card">
+                    <div class="toolbar">
+                        <div class="field grow-170">
+                            <label for="selUser">评估对象</label>
+                            <select class="select" id="selUser" onchange="runAssessment()"></select>
+                        </div>
+                        <div class="field grow-220">
+                            <label for="selJob">目标岗位</label>
+                            <select class="select" id="selJob" onchange="runAssessment()"></select>
+                        </div>
+                        <button class="btn btn--primary" type="button" onclick="runAssessment()">开始评估</button>
+                        <button class="btn btn--dark" type="button" onclick="saveAssessment()">保存本次评估</button>
+                        <a class="btn" href="plan_list.html">去学习计划</a>
+                    </div>
+                    <p class="pw-hint mt-8" id="saveHint"></p>
+                </div>
+            </section>
+
+            <!-- 匹配结果大卡：分数 + 等级评语 -->
+            <section class="sec">
+                <div class="split">
+                    <div class="split-main">
+                        <div class="sec-head">
+                            <span class="sec-no">01</span>
+                            <h2 class="sec-title">匹配结果</h2>
+                            <span class="sec-note" id="resultNote"></span>
+                        </div>
+                        <div id="score"></div>
+                    </div>
+                    <div class="split-side">
+                        <div class="sec-head">
+                            <span class="sec-no">02</span>
+                            <h2 class="sec-title">优先补齐</h2>
+                        </div>
+                        <div id="gap"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 左：优先补齐的差距条形 ｜ 右：必备技能达标情况 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">03</span>
+                    <h2 class="sec-title">加权计算明细</h2>
+                    <span class="sec-note">每一项技能怎么算进总分</span>
+                </div>
+                <div class="tbl-wrap">
+                    <table class="tbl" id="detailTable"></table>
+                </div>
+            </section>
+
+            <!-- 加权计算明细表：每一项技能的得分来源 -->
+            <section class="sec">
+                <div class="sec-head">
+                    <span class="sec-no">04</span>
+                    <h2 class="sec-title">历史评估记录</h2>
+                    <span class="sec-note" id="historyNote">一共 3 次</span>
+                </div>
+                <div class="tbl-wrap">
+                    <table class="tbl" id="historyTable"></table>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/assessment_form.js"></script>
+
+</body>
+
+</html>

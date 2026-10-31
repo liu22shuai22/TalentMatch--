@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：登录页
+    对应数据库表：users（用户表）
+    功能描述：账号口令校验登录，登录后进入工作台；含明文切换与演示口令提示
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div class="login">
+
+        <!-- 左侧品牌区：背景图 + 大标题 + 三列特性 -->
+        <section class="login-left">
+            <div class="login-bg">
+                <img src="../img/login-hero.jpg" alt="">
+                <div class="login-bg-mask"></div>
+            </div>
+            <!-- 左下角暗色斜切装饰 -->
+            <div class="login-corner"></div>
+
+            <!-- 顶部：品牌标 + 宣传语 -->
+            <header class="login-top">
+                <a class="brand brand--panel" href="welcome.html">
+                    <span class="brand-mark brand-mark--gold">TM</span>
+                    <span>
+                        <span class="brand-name">职途智配</span>
+                        <span class="brand-sub brand-sub--gold">TALENT MATCH</span>
+                    </span>
+                </a>
+                <p class="login-slogan"><span class="slogan-dash"></span>用数据，连接职业与未来</p>
+            </header>
+
+            <!-- 中部：大标题 + 说明文字 -->
+            <div class="login-mid">
+                <h1 class="login-title"><span class="t-white">先量一量</span><br><span class="t-yellow">再选岗位。</span></h1>
+                <p class="login-lede">选一个岗位，按你现在的技能算出匹配分。差的几项会变成学习任务。</p>
+            </div>
+
+            <!-- 底部三列特性（图标全部 CSS 绘制） -->
+            <div class="login-feats">
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span class="ico-ring"></span></span>
+                        <span class="feat-title">01 基于技能的精准匹配</span>
+                    </div>
+                    <p class="feat-sub">逐项「权重 × 等级」，算出你的岗位匹配度</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span
+                                class="ico-bars"><span></span><span></span><span></span></span></span>
+                        <span class="feat-title">02 个性化学习路径</span>
+                    </div>
+                    <p class="feat-sub">找出你的技能差距，排好合适的学习任务</p>
+                </div>
+                <div class="feat">
+                    <div class="feat-head">
+                        <span class="feat-badge"><span class="ico-up">&nearr;</span></span>
+                        <span class="feat-title">03 持续跟踪成长</span>
+                    </div>
+                    <p class="feat-sub">记录学习进度，见证你的职业进步</p>
+                </div>
+            </div>
+
+            <p class="muted copyright-panel">&copy; 2026 职途智配 TalentMatch</p>
+        </section>
+
+        <!-- 右侧表单区 -->
+        <section class="login-right">
+            <p class="login-tag">职业有方向 · 成长有路径</p>
+            <!-- 右下角城市剪影装饰（纯 CSS） -->
+            <div class="login-city">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <!-- 表单盒子 -->
+            <div class="login-box">
+                <h2>登录账号</h2>
+                <p class="login-sub">用你的用户名和密码进入工作台</p>
+
+                <!-- 登录表单：validateLogin() 校验 -->
+                <form action="../index.html" method="get" onsubmit="return validateLogin()">
+                    <p class="form-error hidden" id="err"></p>
+
+                    <div class="field">
+                        <label for="username">用户名</label>
+                        <div class="in-wrap">
+                            <span class="in-ico"></span>
+                            <input class="input" type="text" id="username" name="username"
+                                placeholder="请输入用户名 / 手机号 / 邮箱" maxlength="20" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">密码</label>
+                        <div class="in-wrap">
+                            <span class="in-ico in-ico--lock"></span>
+                            <input class="input input--pw" type="password" id="password" name="password"
+                                placeholder="请输入密码" maxlength="20">
+                            <button class="pw-eye" type="button" onclick="togglePassword()" aria-label="显示或隐藏密码">
+                                <span class="eye"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="check-line">
+                        <label><input type="checkbox" id="remember" name="remember" checked>记住这台设备</label>
+                        <a class="forgot" href="mailto:admin@example.com">忘记密码？</a>
+                    </div>
+
+                    <button class="btn btn--primary btn--block" type="submit">登录 &rarr;</button>
+                    <button class="btn btn--block mt-10" type="reset">重置</button>
+                </form>
+
+                <p class="login-foot-links">演示 zhangwei / 123456</p>
+
+                <p class="login-foot-links">还没有账号？
+                    <a href="register.html">马上注册</a>
+                    ｜ <a href="mailto:admin@example.com">联系管理员申请开通</a>
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/login.js"></script>
+
+</body>
+
+</html>

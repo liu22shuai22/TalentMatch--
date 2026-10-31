@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+    页面名称：个人中心
+    对应数据库表：users（用户表）、userSkills（用户技能表）、skills（技能表）
+    功能描述：账号信息查看、修改登录口令、技能证明材料编辑
+    作者：刘帅 2621010714
+    完成日期：2026-10-29
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 · 职途智配</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ==================== 左侧固定导航：品牌 / 菜单（main.js 渲染）/ 当前用户 ==================== -->
+    <aside class="side">
+        <a class="brand" href="welcome.html">
+            <span class="brand-mark">TM</span>
+            <span>
+                <span class="brand-name">职途智配</span>
+                <span class="brand-sub">TALENT MATCH</span>
+            </span>
+        </a>
+        <nav class="nav" id="nav"></nav>
+        <div class="side-foot" id="sideWho"></div>
+    </aside>
+
+    <!-- ==================== 主内容区 ==================== -->
+    <main class="main">
+        <div class="wrap">
+
+            <!-- 页头：标题 + 副标题 -->
+            <header class="page-head">
+                <div>
+                    <p class="page-crumb">MY ACCOUNT</p>
+                    <h1 class="page-title">个人中心</h1>
+                    <p class="page-lede">账号信息、登录口令和技能证明材料都在这里维护。静态原型：修改只写进本页内存，刷新后回到测试数据。</p>
+                </div>
+                <div class="page-meta" id="meta"></div>
+            </header>
+
+            <!-- 左：账号信息 + 修改口令 ｜ 右：技能证明材料 -->
+            <section class="sec mt-0">
+                <div class="split">
+                    <div class="split-main">
+                        <!-- 账号信息：来自用户表 -->
+                        <div class="sec-head">
+                            <span class="sec-no">01</span>
+                            <h2 class="sec-title">账号信息</h2>
+                            <span class="sec-note">用户表</span>
+                        </div>
+                        <div class="card" id="accountCard"></div>
+
+                        <!-- 修改口令 -->
+                        <div class="sec-head mt-18">
+                            <span class="sec-no">02</span>
+                            <h2 class="sec-title">修改登录口令</h2>
+                        </div>
+                        <div class="card">
+                            <div class="field">
+                                <label for="oldPwd">当前口令</label>
+                                <input class="input" type="password" id="oldPwd" maxlength="20"
+                                    placeholder="演示口令：123456">
+                            </div>
+                            <div class="field mt-14">
+                                <label for="newPwd">新口令（至少 6 位）</label>
+                                <input class="input" type="password" id="newPwd" maxlength="20">
+                            </div>
+                            <div class="field mt-14">
+                                <label for="newPwd2">确认新口令</label>
+                                <input class="input" type="password" id="newPwd2" maxlength="20">
+                            </div>
+                            <div class="flex-top mt-14">
+                                <button class="btn btn--primary" type="button" onclick="changePwd()">确认修改</button>
+                                <button class="btn" type="button" onclick="resetPwdForm()">清空</button>
+                            </div>
+                            <p class="form-error hidden" id="pwdErr"></p>
+                            <p class="pw-hint mt-10" id="pwdHint"></p>
+                            <div class="callout mt-14">
+                                说明：正式系统里口令以 SHA-256 摘要存进「密码摘要」字段；静态原型不引入加密，
+                                这里改的是内存里的明文口令，改完立即生效（本页演示登录时用）。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="split-side">
+                        <!-- 技能证明材料：来自用户技能表 -->
+                        <div class="sec-head">
+                            <span class="sec-no">03</span>
+                            <h2 class="sec-title">技能证明材料</h2>
+                            <span class="sec-note" id="proofNote"></span>
+                        </div>
+                        <div id="proofList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="foot">
+                <span>&copy; 2026 职途智配 TalentMatch · 岗位能力匹配平台</span>
+            </footer>
+
+        </div>
+    </main>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/user_form.js"></script>
+</body>
+
+</html>
